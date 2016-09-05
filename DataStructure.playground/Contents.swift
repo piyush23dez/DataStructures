@@ -326,20 +326,20 @@ var start = 0
 var array1 = [Int]()
 var end = 0
 
+
 func reverseArray() {
     
-    if start >= end {
-        return
+    if start < end {
+        
+        let temp = array1[start]
+        array1[start] = array1[end]
+        array1[end] = temp
+        
+        start += 1
+        end -= 1
+        
+        reverseArray()
     }
-    
-    let temp = array1[start]
-    array1[start] = array1[end]
-    array1[end] = temp
-    
-    start += 1
-    end -= 1
-    
-    reverseArray()
 }
 
 let arr = [5,6,7,8,9]
