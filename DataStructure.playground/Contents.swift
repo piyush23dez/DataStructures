@@ -464,7 +464,7 @@ func getPartitionIndex(inout arr: [Int], start: Int, end: Int) -> Int {
     
     for index in start..<end {
         
-        if arr[index] < pivot {
+        if arr[index] <= pivot {
             
             if  index != pIndex {
                 swap(&arr[index], &arr[pIndex])
