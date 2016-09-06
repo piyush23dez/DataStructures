@@ -410,3 +410,32 @@ func seperateEvenOddArrays(arr: [Int]) {
 //evenArray
 //oddArray
 
+func binarySearch(arr: [Int], numeberToBeSearch: Int) {
+    
+    let min = 0
+    let max = arr.count-1
+    let mid = (min+max)/2
+
+    if numeberToBeSearch < arr[min] || numeberToBeSearch > arr[max] {
+        print("search value \(numeberToBeSearch) not found")
+        return
+    }
+    
+    let midElement = arr[mid]
+    
+    if midElement > numeberToBeSearch {
+        let slice = Array(arr[min...mid-1])
+        binarySearch(slice, numeberToBeSearch: numeberToBeSearch)
+    }
+    else if midElement < numeberToBeSearch {
+        let slice = Array(arr[mid+1...max])
+        binarySearch(slice, numeberToBeSearch: numeberToBeSearch)
+    }
+    else {
+        print("search value \(numeberToBeSearch) found")
+    }
+}
+
+
+let numberList : Array<Int> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+binarySearch(numberList, numeberToBeSearch: 1)
