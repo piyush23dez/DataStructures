@@ -455,3 +455,40 @@ func quickSort<T: Comparable>(arr: [T]) -> [T] {
 let randomArr = [ 10, 0, 3, 9, 2, 14, 8, 27, 1, 5, 8, -1, 26 ]
 
 let quickArray = quickSort(randomArr)
+
+
+func getPartitionIndex(inout arr: [Int], start: Int, end: Int) -> Int {
+    
+    let pivot = arr[end]
+    var pIndex = start
+    
+    for index in start..<end {
+        
+        if arr[index] < pivot {
+            
+            if  index != pIndex {
+                swap(&arr[index], &arr[pIndex])
+            }
+            pIndex += 1
+        }
+    }
+    
+    if  pIndex != end {
+        swap(&arr[pIndex], &arr[end])
+    }
+    return pIndex
+}
+
+func quickerSortArray(inout arr: [Int], start: Int, end: Int) {
+    
+    if start < end {
+        
+        let pIndex: Int = getPartitionIndex(&arr, start: start, end: end)
+        
+        quickerSortArray(&arr, start: start, end: (pIndex-1))
+        quickerSortArray(&arr, start: (pIndex+1), end: end)
+    }
+}
+
+var randomAr = [ 10, 0, 3, 9, 2, 14, 8, 27, 1, 5, 8, -1, 26 ]
+quickerSortArray(&randomAr, start: 0, end: randomAr.count-1 )
