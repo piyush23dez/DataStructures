@@ -492,3 +492,62 @@ func quickerSortArray(inout arr: [Int], start: Int, end: Int) {
 
 var randomAr = [ 10, 0, 3, 9, 2, 14, 8, 27, 1, 5, 8, -1, 26 ]
 quickerSortArray(&randomAr, start: 0, end: randomAr.count-1 )
+
+//Binary Search
+
+let array = [1,2,3,4,5,6,7]
+
+func binarySearch(searchNum: Int, list: [Int]) -> Bool {
+    
+    var leftIndex = 0
+    var rightIndex = array.count-1
+    
+    while leftIndex <= rightIndex {
+        
+        let midIndex = (leftIndex+rightIndex)/2
+        let middleValue = array[midIndex]
+        
+        if searchNum == middleValue {
+            return true
+        }
+        
+        if searchNum < middleValue {
+            rightIndex = midIndex-1
+        }
+        
+        if searchNum > middleValue {
+            leftIndex = midIndex+1
+        }
+    }
+    return false
+}
+
+print(binarySearch(searchNum: 0,list: array))
+
+
+//Find most common name in an array
+
+var nameArray = ["Piyush", "Mohit", "Piyush", "Swift"]
+
+func findMostCommonName() -> String {
+   var nameDict = [String : Int]()
+   
+   for name in nameArray {
+       if let countValue = nameDict[name] {
+           nameDict[name] = countValue+1
+       }
+       else {
+            nameDict[name] = 1
+       }
+   }
+   
+   var mostCommonName = ""
+   
+   for (key, count) in nameDict where count > 1 {
+     mostCommonName = key
+   }
+   return mostCommonName
+}
+
+let commonName = findMostCommonName()
+print(commonName)
