@@ -551,3 +551,29 @@ func findMostCommonName() -> String {
 
 let commonName = findMostCommonName()
 print(commonName)
+
+//Reverse every other word
+var sentence = "Hello Swift Apple Google"
+
+func reverseEveryOtherWord(sentence: String) -> String {
+    
+    let allWords = sentence.components(separatedBy: " ")
+    var newSenetence = ""
+    
+    for (index, word) in allWords.enumerated() {
+       
+        if newSenetence != "" {
+            newSenetence += " "
+        }
+        
+        if index % 2 == 1 {
+            newSenetence += String(word.characters.reversed())
+        }else {
+            newSenetence += word
+        }
+    }
+    return newSenetence
+}
+
+let otherWordReversed = reverseEveryOtherWord(sentence: sentence)
+
