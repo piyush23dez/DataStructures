@@ -423,11 +423,11 @@ func binarySearch(arr: [Int], numeberToBeSearch: Int) {
     
     let midElement = arr[mid]
     
-    if midElement > numeberToBeSearch {
+    if numeberToBeSearch < midElement  {
         let slice = Array(arr[min...mid-1])
         binarySearch(slice, numeberToBeSearch: numeberToBeSearch)
     }
-    else if midElement < numeberToBeSearch {
+    else if numeberToBeSearch > midElement {
         let slice = Array(arr[mid+1...max])
         binarySearch(slice, numeberToBeSearch: numeberToBeSearch)
     }
@@ -576,4 +576,3 @@ func reverseEveryOtherWord(sentence: String) -> String {
 }
 
 let otherWordReversed = reverseEveryOtherWord(sentence: sentence)
-
