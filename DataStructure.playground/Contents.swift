@@ -576,3 +576,28 @@ func reverseEveryOtherWord(sentence: String) -> String {
 }
 
 let otherWordReversed = reverseEveryOtherWord(sentence: sentence)
+
+//2D Array - Switch Rows to Columns
+
+let array: [[Int]] = [ [13,4,8,14,1], [9,6,3,7,21], [5,12,17,9,3] ]
+var newArray: [[Int]] = []
+
+//let desired array = [ [(0,0), (1,0), (2,0)], 
+//                      [(0,1), (1,1), (2,1)],
+//                      [(0,2), (1,2), (2,2)]             
+//                      [(0,3), (1,3), (2,3)]...so on ]
+
+//As we have to convert 3X5 (Rows X Columns) array in to 5X3 (Rows X Columns) array, our inner loop should be of desired item count which is here 3 columns
+for var x in 0..<array[0].count {
+  
+  //this array will hold transformed subarrays
+  var tempArray: [Int] = []
+  
+  for var y in 0..<array.count {
+    tempArray.append(array[y][x])
+    print("[\(y)][\(x)]: \(tempArray)")
+  }
+  newArray.append(tempArray)
+}
+print("Transformed Array: \(newArray)")
+
