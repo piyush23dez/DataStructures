@@ -578,7 +578,6 @@ func reverseEveryOtherWord(sentence: String) -> String {
 let otherWordReversed = reverseEveryOtherWord(sentence: sentence)
 
 //2D Array - Switch Rows to Columns
-
 let array: [[Int]] = [ [13,4,8,14,1], [9,6,3,7,21], [5,12,17,9,3] ]
 var newArray: [[Int]] = []
 
@@ -601,3 +600,21 @@ for var x in 0..<array[0].count {
 }
 print("Transformed Array: \(newArray)")
 
+//Binary Search
+var numList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+func binarySearch(key: Int, imin: Int, imax: Int) {
+  
+  var midIndex: Double = round(Double((imin+imax)/2))
+  var midNumber = numList[Int(midIndex)]
+  
+  if midNumber > key {
+    binarySearch(key: key, imin: imin, imax: Int(midIndex-1))
+  } else if midNumber < key {
+    binarySearch(key: key, imin: Int(midIndex)+1, imax: imax)
+  } else {
+    //key found
+    print("value \(key) found in array")
+  }
+}
+
+binarySearch(key: 4, imin: 0, imax: numList.count-1)
