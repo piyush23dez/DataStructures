@@ -13,6 +13,10 @@ class Node<T: Equatable> {
     
     var data: T? = nil
     var next: Node? = nil
+    
+    func setLink(node: Node) {
+        next = node
+    }
 }
 
 class Linklist<T: Equatable> {
@@ -47,6 +51,20 @@ class Linklist<T: Equatable> {
                 temp = temp.next!
             }
             temp.next = newNode
+        }
+    }
+    
+    func insertAtEnd(link: Node<T>) {
+        
+        if head.data == nil {
+            head.data = link.data
+        }
+        else {
+            var temp =  head
+            while temp.next != nil {
+                temp = temp.next!
+            }
+            temp.next = link
         }
     }
     
@@ -165,7 +183,7 @@ class Linklist<T: Equatable> {
         }
         
         if temp.next != nil {
-            reverseWithRecurstion(temp.next!)
+            reverseWithRecurstion(temp: temp.next!)
         }
         
         // nil  <- 1 <- 2 <- 3 <- 4 <- 5  <- head
@@ -181,14 +199,58 @@ class Linklist<T: Equatable> {
             print(currentNode.data!)
             currentNode = currentNode.next
         }
+        print("\n")
+
     }
+
+    func isCircular() -> Bool {
+        var fastPtr: Node? = head
+        var slowPtr: Node? = head
+        
+        while fastPtr != nil && fastPtr?.next != nil {
+            fastPtr = fastPtr?.next!.next!
+            slowPtr = slowPtr?.next!
+            if fastPtr === slowPtr {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
 }
 
 let list = Linklist<Int>()
-list.insertAtEnd(1)
-list.insertAtEnd(2)
-list.insertAtEnd(3)
+let node5 = Node<Int>()
+node5.data = 9
 
+let node6 = Node<Int>()
+node6.data = 6
+
+let node7 = Node<Int>()
+node7.data = 7
+
+let node1 = Node<Int>()
+node1.data = 1
+
+let node2 = Node<Int>()
+node2.data = 2
+
+list.insertAtEnd(link: node5)
+list.insertAtEnd(link: node6)
+list.insertAtEnd(link: node7)
+list.insertAtEnd(link: node1)
+list.insertAtEnd(link: node2)
+
+//list.insertAtEnd(data: 5)
+//list.insertAtEnd(data: 6)
+//list.insertAtEnd(data: 7)
+//list.insertAtEnd(data: 1)
+//list.insertAtEnd(data: 2)
+//list.showList()
+
+//node2.setLink(node: node7)
+list.isCircular()
 //list.reverseWithRecurstion(list.head)
 //list.reverse()
 //list.deleteNode(n: 1)
@@ -198,11 +260,11 @@ list.insertAtEnd(3)
 //list.insertAtBegining(data: 2)
 //list.insertAtBegining(data: 3)
 
-list.insertAtPosition(4,n: 4)
+//list.insertAtPosition(data: 4, n: 4)
 //list.insertAtPosition(data: 2,n: 2)
 //list.insertAtPosition(data: 3,n: 3)
 
-list.showList()
+//list.showList()
 
 
 //Union of two sorted array
@@ -247,7 +309,7 @@ func mergeArrays(arr1: [Int], arr2: [Int]) -> [Int] {
 
 let arr1 = [1,4,6,8]
 let arr2 = [2,3,5,7]
-let merge = mergeArrays(arr1, arr2: arr2)
+let merge = mergeArrays(arr1: arr1, arr2: arr2)
 
 
 //intersection of 2 sorted arrays
@@ -363,7 +425,7 @@ func shuffleArray(arr: [Int]) -> [Int] {
     }
     return arr1
 }
-shuffleArray([6,2,8,4,7])
+shuffleArray(arr: [6,2,8,4,7])
 
 
 //fibonacci
@@ -386,7 +448,7 @@ func generateFibonacci(number: Int) {
         index += 1
     }
 }
-generateFibonacci(5)
+generateFibonacci(number: 5)
 
 
 //even and odd arrays
@@ -425,11 +487,11 @@ func binarySearch(arr: [Int], numeberToBeSearch: Int) {
     
     if numeberToBeSearch < midElement  {
         let slice = Array(arr[min...mid-1])
-        binarySearch(slice, numeberToBeSearch: numeberToBeSearch)
+        binarySearch(arr: slice, numeberToBeSearch: numeberToBeSearch)
     }
     else if numeberToBeSearch > midElement {
         let slice = Array(arr[mid+1...max])
-        binarySearch(slice, numeberToBeSearch: numeberToBeSearch)
+        binarySearch(arr: slice, numeberToBeSearch: numeberToBeSearch)
     }
     else {
         print("search value \(numeberToBeSearch) found")
@@ -438,7 +500,7 @@ func binarySearch(arr: [Int], numeberToBeSearch: Int) {
 
 
 let numberList : Array<Int> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-binarySearch(numberList, numeberToBeSearch: 1)
+binarySearch(arr: numberList, numeberToBeSearch: 1)
 
 func quickSort<T: Comparable>(arr: [T]) -> [T] {
     
@@ -449,15 +511,15 @@ func quickSort<T: Comparable>(arr: [T]) -> [T] {
     let equal = arr.filter { $0 == pivot }
     let greater = arr.filter { $0 > pivot }
     
-    return quickSort(less) + equal + quickSort(greater)
+    return quickSort(arr: less) + equal + quickSort(arr: greater)
 }
 
 let randomArr = [ 10, 0, 3, 9, 2, 14, 8, 27, 1, 5, 8, -1, 26 ]
 
-let quickArray = quickSort(randomArr)
+let quickArray = quickSort(arr: randomArr)
 
 
-func getPartitionIndex(inout arr: [Int], start: Int, end: Int) -> Int {
+func getPartitionIndex( arr: inout [Int], start: Int, end: Int) -> Int {
     
     let pivot = arr[end]
     var pIndex = start
@@ -467,31 +529,31 @@ func getPartitionIndex(inout arr: [Int], start: Int, end: Int) -> Int {
         if arr[index] <= pivot {
             
             if  index != pIndex {
-                swap(&arr[index], &arr[pIndex])
+                arr.swapAt(index, pIndex)
             }
             pIndex += 1
         }
     }
     
     if  pIndex != end {
-        swap(&arr[pIndex], &arr[end])
+        arr.swapAt(pIndex, end)
     }
     return pIndex
 }
 
-func quickerSortArray(inout arr: [Int], start: Int, end: Int) {
+func quickerSortArray( arr: inout [Int], start: Int, end: Int) {
     
     if start < end {
         
-        let pIndex: Int = getPartitionIndex(&arr, start: start, end: end)
+        let pIndex: Int = getPartitionIndex(arr: &arr, start: start, end: end)
         
-        quickerSortArray(&arr, start: start, end: (pIndex-1))
-        quickerSortArray(&arr, start: (pIndex+1), end: end)
+        quickerSortArray(arr: &arr, start: start, end: (pIndex-1))
+        quickerSortArray(arr: &arr, start: (pIndex+1), end: end)
     }
 }
 
 var randomAr = [ 10, 0, 3, 9, 2, 14, 8, 27, 1, 5, 8, -1, 26 ]
-quickerSortArray(&randomAr, start: 0, end: randomAr.count-1 )
+quickerSortArray(arr: &randomAr, start: 0, end: randomAr.count-1 )
 
 //Binary Search
 
@@ -578,7 +640,7 @@ func reverseEveryOtherWord(sentence: String) -> String {
 let otherWordReversed = reverseEveryOtherWord(sentence: sentence)
 
 //2D Array - Switch Rows to Columns
-let array: [[Int]] = [ [13,4,8,14,1], [9,6,3,7,21], [5,12,17,9,3] ]
+let array2: [[Int]] = [ [13,4,8,14,1], [9,6,3,7,21], [5,12,17,9,3] ]
 var newArray: [[Int]] = []
 
 //let desired array = [ [(0,0), (1,0), (2,0)], 
@@ -587,13 +649,13 @@ var newArray: [[Int]] = []
 //                      [(0,3), (1,3), (2,3)]...so on ]
 
 //As we have to convert 3X5 (Rows X Columns) array in to 5X3 (Rows X Columns) array, our inner loop should be of desired item count which is here 3 columns
-for var x in 0..<array[0].count {
+for var x in 0..<array2[0].count {
   
   //this array will hold transformed subarrays
   var tempArray: [Int] = []
   
-  for var y in 0..<array.count {
-    tempArray.append(array[y][x])
+  for var y in 0..<array2.count {
+    tempArray.append(array2[y][x])
     print("[\(y)][\(x)]: \(tempArray)")
   }
   newArray.append(tempArray)
