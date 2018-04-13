@@ -32,7 +32,7 @@ class Linklist<T: Equatable> {
             let newNode = Node<T>()
             newNode.data = data
             
-            newNode.next = head // head's previuos node is nil so we can set this way.
+            newNode.next = head
             head = newNode
         }
     }
