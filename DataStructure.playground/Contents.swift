@@ -81,12 +81,12 @@ class Linklist<T: Equatable> {
             let newNode = Node<T>()
             newNode.data = data
             
-            if n == 1 {
+            if n == 0 {
                 newNode.next = head
                 head = newNode
             }
             else {
-                for _ in 0..<n-2 {
+                for _ in 0..<n-1 {
                     temp = temp.next!
                 }
                 
@@ -98,7 +98,7 @@ class Linklist<T: Equatable> {
     
     func deleteNode(n: Int) {
         
-        if n == 1 {
+        if n == 0 {
             
             if head.next == nil {
                 head = Node<T>()
@@ -111,7 +111,7 @@ class Linklist<T: Equatable> {
             
             var temp = head
             
-            for _ in 0..<n-2 {
+            for _ in 0..<n-1 {
                 temp = temp.next! // n-1'th node
             }
             
@@ -221,36 +221,36 @@ class Linklist<T: Equatable> {
 }
 
 let list = Linklist<Int>()
-let node5 = Node<Int>()
-node5.data = 9
-
-let node6 = Node<Int>()
-node6.data = 6
-
-let node7 = Node<Int>()
-node7.data = 7
-
 let node1 = Node<Int>()
-node1.data = 1
+node1.data = 9
 
 let node2 = Node<Int>()
-node2.data = 2
+node2.data = 6
 
-list.insertAtEnd(link: node5)
-list.insertAtEnd(link: node6)
-list.insertAtEnd(link: node7)
+let node3 = Node<Int>()
+node3.data = 7
+
+let node4 = Node<Int>()
+node4.data = 1
+
+let node5 = Node<Int>()
+node5.data = 2
+
 list.insertAtEnd(link: node1)
 list.insertAtEnd(link: node2)
+list.insertAtEnd(link: node3)
+list.insertAtEnd(link: node4)
+list.insertAtEnd(link: node5)
 
 //list.insertAtEnd(data: 5)
 //list.insertAtEnd(data: 6)
 //list.insertAtEnd(data: 7)
 //list.insertAtEnd(data: 1)
 //list.insertAtEnd(data: 2)
-//list.showList()
+list.showList()
 
 //node2.setLink(node: node7)
-list.isCircular()
+//list.isCircular()
 //list.reverseWithRecurstion(list.head)
 //list.reverse()
 //list.deleteNode(n: 1)
@@ -261,10 +261,10 @@ list.isCircular()
 //list.insertAtBegining(data: 3)
 
 //list.insertAtPosition(data: 4, n: 4)
-//list.insertAtPosition(data: 2,n: 2)
+list.insertAtPosition(data: 4,n: 0)
 //list.insertAtPosition(data: 3,n: 3)
 
-//list.showList()
+list.showList()
 
 
 //Union of two sorted array
