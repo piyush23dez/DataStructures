@@ -177,7 +177,7 @@ class Linklist<T: Equatable> {
     
 
     //Time complexity : O(n) Assume that n is the list's length. Space complexity : O(n)
-    func reverseWithRecurstion(head: Node<T>) {
+    func reverseWithRecurstion() {
         var temp = head
         if temp.next == nil {
             head = temp
