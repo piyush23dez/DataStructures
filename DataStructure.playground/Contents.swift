@@ -175,22 +175,23 @@ class Linklist<T: Equatable> {
         head = currentNode
     }
     
-    
-    func reverseWithRecurstion(temp: Node<T>) {
+
+    //Time complexity : O(n) Assume that n is the list's length. Space complexity : O(n)
+    func reverseWithRecurstion(head: Node<T>) {
+        var temp = head
         if temp.next == nil {
             head = temp
             return
         }
         
+        
         if temp.next != nil {
-            reverseWithRecurstion(temp: temp.next!)
+            reverseWithRecurstion(head: temp.next!)
         }
         
         // nil  <- 1 <- 2 <- 3 <- 4 <- 5  <- head
-        let lastNode = temp.next //as we break link between 4 -> 5, we will save 5th node address
-        lastNode?.next = temp //assign 4th node address in 5th node next field
-        temp.next = nil // assign 4th node next field as nil
-        
+        temp.next.next = head
+        temp.next = nil
     }
     
     func showList() {
