@@ -476,27 +476,6 @@ func generateFibonacci(number: Int) {
 generateFibonacci(number: 5)
 
 
-//even and odd arrays
-var evenArray: [Int] = []
-var oddArray: [Int] = []
-
-func seperateEvenOddArrays(arr: [Int]) {
-    
-    for i in 0..<arr.count {
-        
-        if arr[i]%2 == 0 {
-            evenArray.append(arr[i])
-        }
-        else {
-            oddArray.append(arr[i])
-        }
-    }
-}
-
-//seperateEvenOddArrays([1,2,3,4,5,6])
-//evenArray
-//oddArray
-
 
 //Find most common name in an array
 
