@@ -208,7 +208,7 @@ class Linklist<T: Equatable> {
             1 -> 2      nil <- 2 <- 3 <- 4 <- 5 <- head
                               (p)  (q)
             step5:
-            main() -> reverse(1) -> reverse(2)
+            main() -> reverse(1)
             nil <- 1 <- 2 <- 3 <- 4 <- 5 <- head
                   (p)  (q)
         */
