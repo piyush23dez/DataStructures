@@ -177,21 +177,45 @@ class Linklist<T: Equatable> {
     
 
     //Time complexity : O(n) Assume that n is the list's length. Space complexity : O(n)
-    func reverseWithRecurstion(head: Node<T>) {
-        var temp = head
-        if temp.next == nil {
-            head = temp
+    func reverseWithRecurstion(p: Node<T>) {
+        if p.next == nil { //exit condition
+            head = p
             return
         }
         
         
-        if temp.next != nil {
-            reverseWithRecurstion(head: temp.next!)
+        if p.next != nil {
+            reverseWithRecurstion(p: p.next!)
         }
+    
+        /*
+            main() -> reverse(1) -> reverse(2) -> reverse(3) -> reverse(4) -> reverse(5)
+            
+            step1:
+            When recurson calls finishes, it will start backward and this will set list like below:
+            1 -> 2 -> 3 -> 4 <- 5 <- head
         
-        // nil  <- 1 <- 2 <- 3 <- 4 <- 5  <- head
-        temp.next.next = head
-        temp.next = nil
+            step2:
+            main() -> reverse(1) -> reverse(2) -> reverse(3) -> reverse(4)
+            1 -> 2 -> 3 ->     nil <- 4 <- 5 <- head
+                                     (p)  (q)
+            step3:
+            main() -> reverse(1) -> reverse(2) -> reverse(3)
+            1 -> 2 -> 3      nil <- 3 <- 4 <- 5 <- head
+                                   (p)  (q)
+            step4:
+            main() -> reverse(1) -> reverse(2)
+            1 -> 2      nil <- 2 <- 3 <- 4 <- 5 <- head
+                              (p)  (q)
+            step5:
+            main() -> reverse(1) -> reverse(2)
+            nil <- 1 <- 2 <- 3 <- 4 <- 5 <- head
+                  (p)  (q)
+        */
+                                    
+        var q = p.next!
+        q.next! = p
+        p.next! = nil        
     }
     
     func showList() {
