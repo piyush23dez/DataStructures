@@ -415,7 +415,7 @@ var end = 0
 
 
 func reverseArray() {
-    
+
     if start < end {
         
         let temp = array1[start]
