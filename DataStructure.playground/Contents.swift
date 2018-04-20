@@ -519,7 +519,7 @@ func reverseEveryOtherWord(sentence: String) -> String {
         }
         
         if index % 2 == 1 {
-            newSenetence += String(word.characters.reversed())
+            newSenetence += String(word.reversed())
         }else {
             newSenetence += word
         }
