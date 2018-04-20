@@ -213,9 +213,9 @@ class Linklist<T: Equatable> {
                   (p)  (q)
         */
                                     
-        var q = p.next!
-        q.next! = p
-        p.next! = nil        
+        var q = p.next! //q = 4.next  which is 5
+        q.next! = p  //5.next = 4
+        p.next! = nil  //4.next = nil       
     }
     
     func showList() {
